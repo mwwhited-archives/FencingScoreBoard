@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FencingScoreBoard.Web.Hubs
@@ -21,8 +23,10 @@ namespace FencingScoreBoard.Web.Hubs
             await base.OnConnectedAsync();
         }
 
-        public async Task SendData(JObject data)
+        public async Task SendData(object jDoc)
         {
+            var data = JObject.Parse(((System.Text.Json.JsonElement)jDoc).GetRawText());
+            //var data = JObject.Parse(jDoc);
             var messageType = (string)data["messageType"];
             if (messageType == "SpecialAction")
             {
@@ -56,7 +60,10 @@ namespace FencingScoreBoard.Web.Hubs
                 await Clients.Caller.SendAsync("ReceiveData", _lastScore);
             }
 
-            await Clients.All.SendAsync("ReceiveData", payload);
+            var converted = JsonConvert.SerializeObject(payload);
+            var jsonDocument = JsonDocument.Parse(converted);
+
+            await Clients.All.SendAsync("ReceiveData", jsonDocument.RootElement);
         }
 
         private object Merge(dynamic payload, JObject data)
