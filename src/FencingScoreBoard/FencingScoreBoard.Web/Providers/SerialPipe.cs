@@ -1,5 +1,7 @@
 ﻿using BinaryDataDecoders.ElectronicScoringMachines.Fencing.Common;
 using BinaryDataDecoders.ToolKit;
+using FencingScoreBoard.Web.Hubs;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -19,21 +21,22 @@ namespace FencingScoreBoard.Web.Providers
         private readonly int _baud;
         private readonly ScoreMachineType _type;
         private readonly ILogger _log;
-        private IParseScoreMachineState _parser;
+        private readonly IParseScoreMachineState _parser;
+        private readonly IHubContext<ScoreMachineHub> _hub;
 
         public SerialPipe(
             IConfiguration config,
             ILogger<SerialPipe> log,
-            IParseScoreMachineFactory factory
+            IParseScoreMachineFactory factory,
+            IHubContext<ScoreMachineHub> hub
             )
         {
             _portName = config["ScoringMachine:Port"];
             _baud = config.GetValue<int>("ScoringMachine:Baud");
             _type = config.GetValue<ScoreMachineType>("ScoringMachine:MachineType");
-
             _parser = factory.Create(_type);
-
             _log = log;
+            _hub = hub;
         }
 
         public async Task Start(CancellationToken cancellationToken)
@@ -62,18 +65,32 @@ namespace FencingScoreBoard.Web.Providers
         }
 
         static IScoreMachineState last = ScoreMachineState.Empty;
-        private Task OnReceived(IScoreMachineState state)
+        private async Task OnReceived(IScoreMachineState state)
         {
             if (!last.Equals(state))
             {
                 _log.LogInformation($"S> {state}");
 
-                //TODO: post stuff to signalr here
+                await ScoreMachineHub.FromScoreMachine(state, _hub);
+                await ScoreMachineHub.FromScoreMachine(new
+                {
+                    messageType = "ScoreMachine",
+
+                    clock = state.Clock.ToString(@"mm\:ss"),
+
+                    playerRightScore = state.Right.Score.ToString(),
+                    playerRightCard = state.Right.Cards.MapColor(),
+                    playerRightLight = state.Right.Lights.MapColor("green"),
+                    playerRightPriority = state.Right.Priority.ToString(),
+
+                    playerLeftScore = state.Left.Score.ToString(),
+                    playerLeftCard = state.Left.Cards.MapColor(),
+                    playerLeftLight = state.Left.Lights.MapColor("red"),
+                    playerLeftPriority = state.Left.Priority.ToString(),
+                }, _hub);
 
                 last = state;
             }
-
-            return Task.FromResult(0);
         }
 
         private async Task OnReceived(Memory<byte> frame)

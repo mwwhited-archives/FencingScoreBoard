@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using BinaryDataDecoders.ElectronicScoringMachines.Fencing.Common;
+using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -57,16 +58,34 @@ namespace FencingScoreBoard.Web.Hubs
             }
             else if (messageType == "ClientConnected" && _lastScore != null)
             {
-                await Clients.Caller.SendAsync("ReceiveData", _lastScore);
+                var converted = JsonConvert.SerializeObject(_lastScore);
+                var jsonDocument = JsonDocument.Parse(converted);
+                await Clients.Caller.SendAsync("ReceiveData", jsonDocument.RootElement);
             }
+
+            {
+                var converted = JsonConvert.SerializeObject(payload);
+                var jsonDocument = JsonDocument.Parse(converted);
+
+                await Clients.All.SendAsync("ReceiveData", jsonDocument.RootElement);
+            }
+        }
+
+        internal static async Task FromScoreMachine(object data, IHubContext<ScoreMachineHub> hub)
+        {
+            var json = JObject.Parse(JsonConvert.SerializeObject(data));
+            var payload = new { source = Guid.Empty, data = json, recording = Recording };
+
+            _lastScore = Merge(payload, json);
 
             var converted = JsonConvert.SerializeObject(payload);
             var jsonDocument = JsonDocument.Parse(converted);
 
-            await Clients.All.SendAsync("ReceiveData", jsonDocument.RootElement);
+
+            await hub.Clients.All.SendAsync("ReceiveData", jsonDocument.RootElement);
         }
 
-        private object Merge(dynamic payload, JObject data)
+        private static object Merge(dynamic payload, JObject data)
         {
             JObject existing = payload.data;
 

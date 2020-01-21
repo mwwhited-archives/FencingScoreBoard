@@ -17,17 +17,12 @@ namespace FencingScoreBoard.Web.Providers
 
         public IParseScoreMachineState Create(ScoreMachineType type)
         {
-            return (IParseScoreMachineState)_provider.GetService(ResolveType(type));
-        }
-
-        public Type ResolveType(ScoreMachineType type)
-        {
             switch (type)
             {
                 case ScoreMachineType.SaintGeorge:
-                    return typeof(SgStateParser);
+                    return new SgStateParser();
                 case ScoreMachineType.Favero:
-                    return typeof(FaveroStateParser);
+                    return new FaveroStateParser();
                 default:
                     throw new NotSupportedException();
             }
