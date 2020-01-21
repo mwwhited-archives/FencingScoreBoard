@@ -1,0 +1,132 @@
+﻿@page
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Score Manager</title>
+</head>
+<body onload="documentReady()">
+
+    <fieldset>
+        <legend>Send Data</legend>
+
+        <fieldset>
+            <legend>Player Right</legend>
+            <label for="playerRightName">Name</label>
+            <input id="playerRightName" name="playerRightName" />
+            <label for="playerRightClub">Club</label>
+            <input id="playerRightClub" name="playerRightClub" />
+            <label for="playerRightScore">Score</label>
+            <input id="playerRightScore" name="playerRightScore" />
+
+            <label for="playerRightCard">Card</label>
+            <select id="playerRightCard" name="playerRightCard">
+                <option value="transparent">None</option>
+                <option value="yellow">Yellow</option>
+                <option value="red">Red</option>
+            </select>
+            <label for="playerRightLight">Light</label>
+            <select id="playerRightLight" name="playerRightLight">
+                <option value="transparent">None</option>
+                <option value="white">White</option>
+                <option value="red">Red</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>Player Left</legend>
+            <label for="playerLeftName">Name</label>
+            <input id="playerLeftName" name="playerLeftName" />
+            <label for="playerLeftClub">Club</label>
+            <input id="playerLeftClub" name="playerLeftClub" />
+            <label for="playerLeftScore">Score</label>
+            <input id="playerLeftScore" name="playerLeftScore" />
+
+            <label for="playerLeftCard">Card</label>
+            <select id="playerLeftCard" name="playerLeftCard">
+                <option value="transparent">None</option>
+                <option value="yellow">Yellow</option>
+                <option value="red">Red</option>
+            </select>
+            <label for="playerLeftLight">Light</label>
+            <select id="playerLeftLight" name="playerLeftLight">
+                <option value="transparent">None</option>
+                <option value="white">White</option>
+                <option value="green">Green</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>Other</legend>
+            <label for="clock">Clock</label>
+            <input id="clock" name="clock" />
+
+            <label for="weapon">Weapon</label>
+            <select id="weapon" name="weapon">
+                <optgroup label="Olympic">
+                    <option value="Foil">Foil</option>
+                    <option value="Saber">Saber</option>
+                    <option value="Epee">Epee</option>
+                </optgroup>
+                <optgroup label="HEMA">
+                    <option value="Long Sword">Long Sword</option>
+                    <option value="Rapier">Rapier</option>
+                    <option value="Rapier and Buckler">Rapier</option>
+                    <option value="Military Saber">Military Saber</option>
+                </optgroup>
+            </select>
+
+            <label for="content">Overlay</label>
+            <select id="content" name="content">
+                <option value="block">On</option>
+                <option value="none">Off</option>
+            </select>
+
+        </fieldset>
+
+        <button id="Post">Post</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>Actions</legend>
+        <div>
+            <button id="StartBout">Start Bout</button>
+            <button id="EndBout">End Bout</button>
+            <span id="recording-status"></span>
+            <button id="ClearReceived">Clear</button>
+            <button id="SwapPlayers">Swap Players</button>
+        </div>
+        <div>
+            <label for="channel">Video Channel</label>
+            <select id="channel" name="channel">
+                <option value="RESET">Reset</option>
+
+                <option value="HDMI1">Stage</option>
+                <option value="HDMI2">HEMA</option>
+
+                <option value="HDMI3">HDMI3</option>
+                <option value="HDMI4">HDMI4</option>
+                <option value="HDMI5">HDMI5</option>
+            </select>
+            <button id="ChangeVideo">Set</button>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Received</legend>
+        <ul id="received"></ul>
+    </fieldset>
+
+    <environment include="Development">
+        <script src="~/lib/babel/polyfill.es5.min.js"></script>
+        <script src="~/lib/signalr/dist/browser/signalr.es5.min.js"></script>
+        <script src="~/js/EventSourcePoly.js"></script>
+        @*
+            <script src="~/js/Manager.es5.min.js" asp-append-version="true"></script>
+            <script src="~/js/Shared.es5.min.js" asp-append-version="true"></script>
+        *@
+        <script src="~/js/Manager.es5.js" asp-append-version="true"></script>
+        <script src="~/js/Shared.es5.js" asp-append-version="true"></script>
+    </environment>
+</body>
+</html>

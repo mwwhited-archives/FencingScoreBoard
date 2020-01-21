@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Sample Control Page</title>
+
+    <script src="http://192.168.0.215:5000/lib/babel/polyfill.es5.min.js"></script>
+    <script src="http://192.168.0.215:5000/lib/signalr/dist/browser/signalr.es5.min.js"></script>
+    <script src="http://192.168.0.215:5000/js/EventSourcePoly.js"></script>
+    <script src="http://192.168.0.215:5000/js/Shared.es5.js"></script>
+
+    <script type="text/javascript">
+        window.ScoreMachineVM.onReceiveData = function (message) {
+            console.log(JSON.stringify(message));
+        };
+        window.ScoreMachineVM.onDocumentReady = function(connection) {
+            console.log("Sample Page Loaded!");
+        };
+    </script>
+</head>
+<body onload="documentReady('http://192.168.0.215:5000')">
+    <table>
+        <thead>
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a onclick="window.ScoreMachineHub.startBout();">Record</a></td>
+                <td>Signal to <b>start</b> recording and switch hall feed to HDMI1</td>
+            </tr>
+            <tr>
+                <td><a onclick="window.ScoreMachineHub.endBout();">Stop</a></td>
+                <td>Signal to <b>stop</b> recording and switch hall feed to HDMI2</td>
+            </tr>
+
+            <tr>
+                <td><a onclick="window.ScoreMachineHub.overlayOn();">Show Overlay</a></td>
+                <td>Signal to turn <b>on</b> overlay</td>
+            </tr>
+            <tr>
+                <td><a onclick="window.ScoreMachineHub.overlayOff();">Hide Overlay</a></td>
+                <td>Signal to turn <b>off</b> overlay</td>
+            </tr>
+
+            <tr>
+                <td><a onclick="window.ScoreMachineHub.updatePlayers({name:'Player 1', club:'club 1'},{name:'Player 2', club:'club 2'});">Set Names</a></td>
+                <td>This will set the player/club names for the display</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

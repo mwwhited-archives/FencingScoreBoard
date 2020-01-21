@@ -1,0 +1,47 @@
+﻿@page
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=1920, initial-scale=" />
+    <title>ScoreMachine</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/ScoreMachine.css" asp-append-version="true" add />
+    </environment>
+</head>
+<body onload="javascript:documentReady()">
+    <div id="content">
+        <div id="score-bar">
+            <div class="player-left">
+                <span id="playerLeftName" class="name"> </span>
+                <span class="club"><span id="playerLeftClub" class="player-club"> </span></span>
+                <span id="playerLeftLight" class="light">&nbsp;</span>
+                <span id="playerLeftScore" class="score">0</span>
+                <!--<span id="playerLeftPriority" class="priority">&nbsp;</span>-->
+            </div>
+            <div class="player-right">
+                <span id="playerRightName" class="name"> </span>
+                <span class="club"><span id="playerRightClub" class="player-club"> </span></span>
+                <span id="playerRightLight" class="light">&nbsp;</span>
+                <span id="playerRightScore" class="score">0</span>
+                <!--<span id="playerRightPriority" class="priority">&nbsp;</span>-->
+            </div>
+            <span id="clock">
+                00:00
+            </span>
+        </div>
+        <div id="cards">
+            <span id="playerLeftCard" class="player-left card">&nbsp;</span>
+            <span id="playerRightCard" class="player-right card">&nbsp;</span>
+        </div>
+        <img id="overlay" src="/images/Backdrop.png" />
+    </div>
+    <environment include="Development">
+        <script src="~/lib/babel/polyfill.es5.min.js"></script>
+        <script src="~/lib/signalr/dist/browser/signalr.es5.min.js"></script>
+        <script src="~/js/EventSourcePoly.js"></script>
+        <script src="~/js/Score.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/Shared.es5.min.js" asp-append-version="true"></script>
+    </environment>
+</body>
+</html>

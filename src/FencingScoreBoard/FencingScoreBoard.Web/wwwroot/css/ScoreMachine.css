@@ -1,0 +1,183 @@
+﻿body {
+    background-color: rgb(240, 0, 240); /*chromakey*/
+    /*background-color: darkgray;*/
+    color: white;
+    height: 100%;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*this is for the bounding boxes*/
+
+/*span {
+    background-color: pink;
+}
+div#score-bar {
+    background-color: lightblue;
+}*/
+
+
+#content {
+    height: 1080px;
+    width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#overlay {
+    position: absolute;
+    display: inline;
+    z-index: 2;
+    top: 0px;
+    left: 0px;
+    height: 1080px;
+    width: 1920px;
+}
+
+#score-bar, #cards {
+    position: absolute;
+    display: inline;
+    top: 860px;
+    left: 0px;
+    height: 65px;
+    width: 1920px;
+}
+
+#score-bar {
+    z-index: 3;
+}
+
+#cards {
+    z-index: 1;
+}
+
+.player-left {
+    position: absolute;
+    display: inline;
+    left: 100px;
+    width: 660px;
+    height: 65px;
+}
+
+.player-right {
+    position: absolute;
+    display: inline;
+    left: 1060px;
+    width: 660px;
+    height: 65px;
+    text-align: right;
+}
+
+.name {
+    position: absolute;
+    display: inline;
+    top: 15px;
+    left: 20px;
+    width: 555px;
+    height: 45px;
+    font-size: 45px;
+}
+
+.player-right .name {
+    left: 95px;
+}
+
+.club {
+    position: absolute;
+    display: inline;
+    top: 70px;
+    left: 5px;
+    width: 630px;
+    height: 30px;
+    font-size: 30px;
+}
+
+.light {
+    position: absolute;
+    display: inline;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 25px;
+}
+
+.player-left .light {
+    left: 670px;
+    /*background: red;*/
+}
+
+.player-right .light {
+    left: -55px;
+    /*background: green;*/
+}
+
+.score {
+    position: absolute;
+    display: inline;
+    top: 5px;
+    width: 60px;
+    height: 60px;
+    font-size: 60px;
+}
+
+.player-left .score {
+    left: 580px;
+    text-align: right;
+}
+
+.player-right .score {
+    left: 20px;
+}
+
+.card {
+    position: absolute;
+    display: inline;
+    top: -10px;
+    width: 50px;
+    height: 60px;
+    border-radius: 10%;
+    -webkit-border-radius: 5px;
+}
+
+.player-left.card {
+    left: 90px;
+    /*background: yellow;*/
+}
+
+.player-right.card {
+    left: 1690px;
+    /*background: yellow;*/
+}
+
+#clock {
+    position: absolute;
+    display: inline;
+    top: 10px;
+    left: 830px;
+    height: 55px;
+    font-size: 55px;
+    width: 165px;
+    text-align: center;
+}
+
+/*.player-club, .player-club {
+    background: linear-gradient( black, navy) navy;
+    padding: 8px 8px 8px 8px;
+    border-radius: 0px 0px 10px 10px;
+    z-index: -100;
+}
+    */
+
+/*.player-left, .player-right {
+    background: linear-gradient(navy, black);
+    padding: 8px;
+    border-radius: 45px 20px;
+    z-index: -100;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}*/
+
