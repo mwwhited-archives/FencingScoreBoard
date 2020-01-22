@@ -46,6 +46,9 @@ namespace FencingScoreBoard.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();

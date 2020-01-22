@@ -1,13 +1,9 @@
-﻿@page
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=1920, initial-scale=" />
-    <title>ScoreMachine</title>
-
-    <environment include="Development">
-        <link rel="stylesheet" href="~/css/ScoreMachine.css" asp-append-version="true" add />
-    </environment>
+    <title>Score Machine</title>
+    <link rel="stylesheet" href="/css/ScoreMachine.css" />\
 </head>
 <body onload="javascript:documentReady()">
     <div id="content">
@@ -36,10 +32,9 @@
         </div>
         <img id="overlay" src="/images/Backdrop.png" />
     </div>
-    <environment include="Development">
-        <script src="~/lib/signalr/dist/browser/signalr.js"></script>
-        <script src="~/js/Score.js" asp-append-version="true"></script>
-        <script src="~/js/Shared.js" asp-append-version="true"></script>
-    </environment>
+
+    <script src="/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="/js/Score.js"></script>
+    <script src="/js/Shared.js"></script>
 </body>
 </html>
