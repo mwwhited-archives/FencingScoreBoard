@@ -1,8 +1,6 @@
 ﻿using BinaryDataDecoders.ElectronicScoringMachines.Fencing.Common;
 using BinaryDataDecoders.ElectronicScoringMachines.Fencing.Favero;
 using FencingScoreBoard.WpCommonf;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;

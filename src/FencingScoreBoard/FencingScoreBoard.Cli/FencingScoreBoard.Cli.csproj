@@ -5,8 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="BinaryDataDecoders.ElectronicScoringMachines.Fencing" Version="1.0.0" />
-    <PackageReference Include="BinaryDataDecoders.ToolKit" Version="1.0.0" />
+    <PackageReference Include="BinaryDataDecoders.ElectronicScoringMachines.Fencing" Version="0.2.0-PullRequest0002.254" />
     <PackageReference Include="System.IO.Ports" Version="4.7.0" />
     <PackageReference Include="Terminal.Gui" Version="0.24.0" />
   </ItemGroup>
