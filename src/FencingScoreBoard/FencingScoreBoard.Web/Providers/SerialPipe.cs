@@ -1,4 +1,5 @@
 ﻿using BinaryDataDecoders.ElectronicScoringMachines.Fencing.Common;
+using BinaryDataDecoders.IO;
 using BinaryDataDecoders.ToolKit;
 using FencingScoreBoard.Web.Hubs;
 using Microsoft.AspNetCore.SignalR;
